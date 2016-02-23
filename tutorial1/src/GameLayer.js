@@ -2,10 +2,35 @@ var GameLayer = cc.LayerColor.extend({
     init: function() {
         this._super( new cc.Color( 127, 127, 127, 255 ) );
         this.setPosition( new cc.Point( 0, 0 ) );
- 
+        
+        var ship = new Ship();
+        ship.setPosition (200,200);
+        ship.scheduleUpdate();
+        this.addChild( ship );
+        this.addKeyboardHandlers();
         return true;
+    },
+    onKeyDown: function( keyCode, event ) {
+	console.log( 'Down: ' + keyCode.toString() );
+    },
+    onKeyUp: function( keyCode, event ) {
+	console.log( 'Up: ' + keyCode.toString() );
+    },
+    addKeyboardHandlers: function() {
+        var self = this;
+        cc.eventManager.addListener({
+            event: cc.EventListener.KEYBOARD,
+            onKeyPressed : function( keyCode, event ) {
+                self.onKeyDown( keyCode, event );
+            },
+            onKeyReleased: function( keyCode, event ) {
+                self.onKeyUp( keyCode, event );
+            }
+        }, this);
     }
+
 });
+
  
 var StartScene = cc.Scene.extend({
     onEnter: function() {
@@ -15,3 +40,5 @@ var StartScene = cc.Scene.extend({
         this.addChild( layer );
     }
 });
+
+    
