@@ -2,16 +2,18 @@ var GameLayer = cc.LayerColor.extend({
     init: function() {
         this._super( new cc.Color( 127, 127, 127, 255 ) );
         this.setPosition( new cc.Point( 0, 0 ) );
-        
         var ship = new Ship();
-        ship.setPosition (200,200);
-        ship.scheduleUpdate();
-        this.addChild( ship );
+       this.ship = new Ship();
+	   this.ship.setPosition( new cc.Point( 200, 220 ) );
+	   this.addChild( this.ship );
+	   this.ship.scheduleUpdate();
         this.addKeyboardHandlers();
         return true;
     },
     onKeyDown: function( keyCode, event ) {
-	console.log( 'Down: ' + keyCode.toString() );
+	if ( keyCode == cc.KEY.space ) {
+	    this.ship.switchDirection();
+	   }
     },
     onKeyUp: function( keyCode, event ) {
 	console.log( 'Up: ' + keyCode.toString() );
