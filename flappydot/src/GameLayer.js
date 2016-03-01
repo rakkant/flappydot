@@ -6,9 +6,7 @@ var GameLayer = cc.LayerColor.extend({
         this.player.scheduleUpdate();
         this.addKeyboardHandlers();
         this.state = GameLayer.STATES.FRONT;
-        this.pillarPair = new PillarPair();
-        this.pillarPair.setPosition( new cc.Point( 700, 300 ) );
-        this.addChild( this.pillarPair );
+        this.pillarPair = null;
         return true;
     },
     addKeyboardHandlers: function() {
@@ -17,6 +15,7 @@ var GameLayer = cc.LayerColor.extend({
             event: cc.EventListener.KEYBOARD,
             onKeyPressed : function( keyCode, event ) {
                 self.onKeyDown( keyCode, event );
+                
             },
             onKeyReleased: function( keyCode, event ) {
                 self.onKeyUp( keyCode, event );
@@ -26,8 +25,8 @@ var GameLayer = cc.LayerColor.extend({
  
        onKeyDown: function( keyCode, event ) {
         if ( this.state == GameLayer.STATES.FRONT ) {
-            this.state = GameLayer.STATES.STARTED;
-             this.player.start() ;
+            this.startGame();
+            this.player.start() ;
               this.player.jump();
            
         } else if ( this.state == GameLayer.STATES.STARTED ) {
@@ -41,6 +40,12 @@ var GameLayer = cc.LayerColor.extend({
         this.pillarPair.setPosition( new cc.Point( 900, 300 ) );
         this.addChild( this.pillarPair );
         this.pillarPair.scheduleUpdate();
+     
+    },
+    startGame: function() {
+        this.createPillarPair();
+        this.player.start();
+        this.player.jump();
     }
 });
 
