@@ -22,7 +22,7 @@ var GameLayer = cc.LayerColor.extend({
  
     onKeyDown: function( keyCode, event ) {
         this.player.jump();
-    },
+    } ,
  
     onKeyUp: function( keyCode, event ) {
     }

@@ -1,7 +1,7 @@
 var Gold = cc.Sprite.extend({
     ctor: function() {
         this._super();
-        this.initWithFile( 'res/images/gold.png' );
+        this.initWithFile( 'res/images/dot.png' );
     },
  
     randomPosition: function() {
